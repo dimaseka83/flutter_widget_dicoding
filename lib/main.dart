@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Oswald'),
       home: FirstScreen(),
     );
   }
@@ -26,16 +26,13 @@ Widget build(BuildContext context){
         icon: Icon(Icons.menu, color: Colors.white),
         onPressed: (){},
         ),
-      title: Text('First Screen'),
+      title: Text('Flutter Demo'),
       actions: <Widget>[
         IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.white,))
       ],
     ),
 
-    body: Center(
-      child: Image.asset('images/android.png', width: 200, height: 200,),
-    ),
-    floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.add),),
+    body: Text('Custom Font', style: TextStyle(fontFamily: 'Oswald', fontSize: 30),),
   );
 }
 
