@@ -21,16 +21,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen>{
-  String dropdownvalue = 'Item 1';
-
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 6',
-  ];
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context){
@@ -39,21 +30,37 @@ class _FirstScreenState extends State<FirstScreen>{
         title: Text('First Screen'),
       ),
 
-      body: DropdownButton(
-        value: dropdownvalue,
-        icon: const Icon(Icons.keyboard_arrow_down),
-        items: items.map((String value) {
-          return new DropdownMenuItem<String>(
-            value: value,
-            child: new Text(value),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            dropdownvalue = newValue!;
-          });
-        },
-      )
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                hintText: 'Write your name here...',
+                labelText: 'Your name',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(onPressed: (){
+              showDialog(
+                context: context,
+                builder: (context){
+                  return AlertDialog(
+                    content: Text('Hello, ${_controller.text}'),
+                  );
+                }
+              );
+            }, child: Text('Submit'))
+          ],
+        ),
+        )
     );
+  }
+
+  @override
+  void dispose(){
+    _controller.dispose();
+    super.dispose();
   }
 }
