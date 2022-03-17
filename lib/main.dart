@@ -17,23 +17,28 @@ class MyApp extends StatelessWidget {
 
 class FirstScreen extends StatelessWidget {
 
-@override
+  final List<int> numberList = [1,2,3,4,5,6,7,8,9,10,11];
 
+@override
 Widget build(BuildContext context){
   return Scaffold(
-    appBar: AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.menu, color: Colors.white),
-        onPressed: (){},
+    body: ListView.separated(itemBuilder: (BuildContext context, int index){
+      return Container(
+        height: 250,
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          border: Border.all(color: Colors.black),
         ),
-      title: Text('Flutter Demo'),
-      actions: <Widget>[
-        IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.white,))
-      ],
-    ),
-
-    body: Text('Custom Font', style: TextStyle(fontFamily: 'Oswald', fontSize: 30),),
+        child: Center(
+          child: Text(
+            '${numberList[index]}',
+            style: TextStyle(fontSize: 50),
+          ),
+        ),
+      );
+    }, separatorBuilder: (BuildContext context, int index){
+      return Divider();
+    }, itemCount: numberList.length)
   );
 }
-
 }
