@@ -15,32 +15,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class FirstScreen extends StatefulWidget {
-    @override
-    _FirstScreenState createState() => _FirstScreenState();
+class FirstScreen extends StatelessWidget {
+
+@override
+
+Widget build(BuildContext context){
+  return Scaffold(
+    appBar: AppBar(
+      leading: IconButton(
+        icon: Icon(Icons.menu, color: Colors.white),
+        onPressed: (){},
+        ),
+      title: Text('First Screen'),
+      actions: <Widget>[
+        IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.white,))
+      ],
+    ),
+
+    body: Center(
+      child: Image.asset('images/android.png', width: 200, height: 200,),
+    ),
+    floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.add),),
+  );
 }
 
-class _FirstScreenState extends State<FirstScreen>{
-  bool agree = false;
-
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First Screen'),
-      ),
-
-      body: ListTile(
-        leading: Checkbox(
-          value: agree,
-          onChanged: (bool? value){
-            setState(() {
-              agree = value!;
-            });
-          },
-        ),
-        title: Text('Agree / Disagree'),
-      ),
-    );
-  }
 }
