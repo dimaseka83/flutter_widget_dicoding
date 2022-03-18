@@ -17,45 +17,39 @@ class MyApp extends StatelessWidget {
 
 
 class FirstScreen extends StatelessWidget  {
-  final String message = 'Hello from First Screen!';
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First Screen'),
-      ),
-      body: Center(
-          child: ElevatedButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen(message)));
-          }, child: Text('Pindah Screen')),
-      ),
-    );
-  }
-}
+    @override
+   Widget build(BuildContext context){
+     return Scaffold(
+       appBar: AppBar(),
+       body: LayoutBuilder(
+         builder: (BuildContext context, BoxConstraints constraints){
+           if (constraints.maxWidth < 600) {
+              return ListView(
+                children: _generateContainers(),
+              );
+           }else if (constraints.maxWidth < 900) {
+             return GridView.count(
+               crossAxisCount:  2, 
+               children: _generateContainers(),
+              );
+           }else{
+             return GridView.count(
+               crossAxisCount: 6, 
+               children: _generateContainers(),
+              );
+           }
+         }
+       ),
+     );
+   }
 
-class SecondScreen extends StatelessWidget {
-  final String message;
-
-  SecondScreen(this.message);
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Second Screen'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(message),
-            OutlinedButton(
-              child: Text('Kembali'),
-              onPressed: () {
-              Navigator.pop(context);
-            })
-          ],
-        )
-      ),
-    );
-  }
+   List<Widget> _generateContainers(){
+     return List<Widget>.generate(20, (index) {
+       return Container(
+         margin: const EdgeInsets.all(8),
+         color: Colors.blueGrey,
+         height: 200,
+       );
+     });
+   }
 }
